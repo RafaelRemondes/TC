@@ -54,14 +54,7 @@ public class ECB {
         int rgb = 0xff000000 | ((data[byteIdx] & 0xff) << 16) | ((data[byteIdx++] & 0xff) << 8) | (data[byteIdx++] &
         0xff);
         byteIdx++;
-        int rByte = (int) data[byteIdx] & 0xFF;
-        byteIdx++;
-        int gByte = (int) data[byteIdx] & 0xFF;
-        byteIdx++;
-        int bByte = (int) data[byteIdx] & 0xFF;
-        byteIdx++;
-        int pixl = (rByte << 16) | (gByte << 8) | bByte;
-        ints[pixel] = pixl;
+        ints[pixel] = rgb;
     }
     return ints;
   }
