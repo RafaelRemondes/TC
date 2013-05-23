@@ -100,7 +100,7 @@ public class ECB {
      
       createImg(cryptoImg);
       
-    } catch (ShortBufferException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException | NoSuchAlgorithmException | KeyStoreException | CertificateException ex) {
+    } catch (Exception ex) {
       Logger.getLogger(ECB.class.getName()).log(Level.SEVERE, null, ex);
     }
      
