@@ -51,17 +51,17 @@ public class ECB {
     int[] ints = new int[data.length / 3];
     int byteIdx = 0;
     for (int pixel = 0; pixel < ints.length;pixel++) {
-       int rgb = 0xff000000 | ((data[byteIdx] & 0xff) << 16) | ((data[byteIdx++] & 0xff) << 8) | (data[byteIdx++] &
+        int rgb = 0xff000000 | ((data[byteIdx] & 0xff) << 16) | ((data[byteIdx++] & 0xff) << 8) | (data[byteIdx++] &
         0xff);
         byteIdx++;
-        /*int rByte = (int) data[byteIdx] & 0xFF;
+        int rByte = (int) data[byteIdx] & 0xFF;
         byteIdx++;
         int gByte = (int) data[byteIdx] & 0xFF;
         byteIdx++;
         int bByte = (int) data[byteIdx] & 0xFF;
         byteIdx++;
-        int rgb = (rByte << 16) | (gByte << 8) | bByte;*/
-        ints[pixel] = rgb;
+        int pixl = (rByte << 16) | (gByte << 8) | bByte;
+        ints[pixel] = pixl;
     }
     return ints;
   }
@@ -98,7 +98,7 @@ public class ECB {
       byte[] clearImg = readImg(path); 
       byte[] cryptoImg = enc(clearImg, key);
      
-      createImg(clearImg);
+      createImg(cryptoImg);
       
     } catch (ShortBufferException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException | NoSuchAlgorithmException | KeyStoreException | CertificateException ex) {
       Logger.getLogger(ECB.class.getName()).log(Level.SEVERE, null, ex);
