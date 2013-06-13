@@ -39,8 +39,8 @@ public class ECB {
 	      return key;
 	    }
 
-  static public byte[] enc(byte[] input, SecretKey key) throws NoSuchAlgorithmException, ShortBufferException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-		Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+  public static byte[] enc(byte[] input, SecretKey key) throws NoSuchAlgorithmException, ShortBufferException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+		Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
     cipher.init(Cipher.ENCRYPT_MODE,key);   
     byte[] cipherText = cipher.doFinal(input);
     return cipherText;
