@@ -33,6 +33,7 @@ public class cbc {
 
   static int n;
   static byte[] iv = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+  static byte[] ivA;
   static SecretKey key;
   static byte[] plainText2 = "1234567812345678".getBytes();
   static byte[] plainText = "ifyourtimetoyouisworthsavingthenyoubetterstartswimmingoryouwillsinklikeastoneforthetimestheyareachanging".getBytes();
@@ -98,6 +99,7 @@ public class cbc {
     byte[] tag = new byte[1];
     if (mod == 1) {
       tag = genIV();
+      ivA = tag;
     } else {
       tag = iv;
     }
@@ -117,17 +119,23 @@ public class cbc {
     List<byte[]> forgedMessage = new ArrayList<>();
     genKey();
     List<byte[]> tags1 = cbcMac(blockList, 0);
+    List<byte[]> tags2 = cbcMac(blockList,1);
     boolean v = verifier(tags1.get(tags1.size() - 1), blockList);
     System.out.println("Real cbc-mac: " + v);
-    
-    byte[] fMessage = new byte[tags1.get(0).length];
-    for (int i = 1; i <= blockList.size()-1; i++) {
-      fMessage = xor(tags1.get(i-1),blockList.get(i));
+    byte[] fMessage = xor(tags1.get(0), blockList.get(1));
+    forgedMessage.add(fMessage);
+    for (int i = 2; i <= blockList.size() - 1; i++) {
+      fMessage = blockList.get(i);
       forgedMessage.add(fMessage);
     }
-    forgedMessage.add(xor(tags1.get(tags1.size()-1),blockList.get(0)));
+    fMessage = xor(tags1.get(tags1.size() - 1), blockList.get(0));
+    forgedMessage.add(fMessage);
     v = verifier(tags1.get(0), forgedMessage);
     System.out.println("Forged cbc-mac:" + v);
+    List<byte[]> ivForgedMessage = blockList;
+    ivForgedMessage.set(0, xor(ivForgedMessage.get(0),ivA));
+    v = verifier(tags2.get(tags2.size()-1),ivForgedMessage);
+    System.out.println("Forged iv, cbc-mac:" + v);
 
   }
 }
