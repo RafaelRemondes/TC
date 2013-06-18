@@ -34,9 +34,6 @@ public class jacobi {
   public static List<BigInteger> list_factor(BigInteger m){
     BigInteger t,k;
     List<BigInteger> factor = new ArrayList<>();    
-    if(is_odd(m)) {
-      return null;
-    }
     t=m.subtract(BigInteger.ONE);
     while(t.compareTo(BigInteger.ZERO)!=0){
       if(m.remainder(t).compareTo(BigInteger.ZERO)==0){
@@ -51,7 +48,8 @@ public class jacobi {
   }
   
   public static BigInteger jacobi(BigInteger m, BigInteger n){
-    if(!is_odd(m)){
+    if(!is_odd(n)){
+      System.out.println("isnull");
       return null;
     }
     
@@ -105,12 +103,6 @@ public class jacobi {
          return jacobi(m,n);
        }
      }
-     
-    /* if(m.remainder(BigInteger.valueOf(4)).compareTo(BigInteger.valueOf(4))==0 && n.remainder(BigInteger.valueOf(4)).compareTo(BigInteger.valueOf(4))==0 && m.remainder(BigInteger.valueOf(2)).compareTo(BigInteger.ZERO)!=0)
-     {return jacobi(n,m).negate();}
-     if(m.remainder(BigInteger.valueOf(2)).compareTo(BigInteger.ZERO) ==0){
-       return jacobi(n,m);
-     }*/
      else {
       return null;
     }
@@ -152,8 +144,12 @@ public class jacobi {
   
   
   public static void main(String[] args){
+      BigInteger n1 = jacobi(BigInteger.valueOf(610),BigInteger.valueOf(987));
+      BigInteger n2 = jacobi(BigInteger.valueOf(20694),BigInteger.valueOf(1987));
+      BigInteger n3 = jacobi(BigInteger.valueOf(1234567),BigInteger.valueOf(11111111));
+      System.out.println("n1: "+n1+" n2: "+n2+" n3: "+n3);
       BigInteger n = BigInteger.valueOf(837);
-      eulerBase(n);
+      //eulerBase(n);
   }
   
 }

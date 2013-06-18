@@ -11,6 +11,10 @@ import java.math.BigInteger;
  */
 public class rsaCracker {
   
+  /*Como o n é relativamente pequeno, é fácil calcular p e q tal que pq = n, a partir dai é calcular a função totient de Euler (p-1)(q-1)
+   * calcular o expoente privado tal que d = e mod(totient(n)). Decififrar consoante com o formato pedido. 
+   */
+  
   static int[] crypto1={6340, 8309, 14010, 8936, 27358 ,25023 ,16481, 25809,23614 ,
                  7135, 24996, 30590, 27570, 26486, 30388, 9395,27584, 14999, 
                  4517, 12146 ,29421 ,26439 ,1606, 17881,25774, 7647, 23901, 7372, 
