@@ -107,7 +107,9 @@ public class cbc {
       try {
         tag = aux(b, tag);
         tags.add(tag);
-      } catch (NoSuchAlgorithmException | ShortBufferException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException | InvalidKeyException ex) {
+      } catch (NoSuchAlgorithmException | ShortBufferException | 
+        NoSuchPaddingException | IllegalBlockSizeException |
+        BadPaddingException | InvalidKeyException ex) {
         Logger.getLogger(cbc.class.getName()).log(Level.SEVERE, null, ex);
       }
     }

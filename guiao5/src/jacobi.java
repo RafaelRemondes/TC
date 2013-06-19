@@ -51,31 +51,29 @@ public class jacobi {
     if(!is_odd(n)){
       System.out.println("isnull");
       return null;
-    }
-    
+    } 
     if(m.compareTo(BigInteger.ZERO) == 0){
       return BigInteger.ZERO;
     }
     if(m.compareTo(BigInteger.ONE) == 0){
       return BigInteger.ONE;
     }
- 
     //propriedade a)
     if(m.compareTo(n)>= 0) {
       return jacobi(m.remainder(n),n);
     }
-    
     //propriedade b)
     if(m.compareTo(BigInteger.valueOf(2)) == 0){
       BigInteger module = n.remainder(BigInteger.valueOf(8));
-      if(module.compareTo(BigInteger.ONE.mod(BigInteger.valueOf(8)))==0 || module.compareTo(BigInteger.valueOf(-1).mod(BigInteger.valueOf(8)))==0) {
+      if(module.compareTo(BigInteger.ONE.mod(BigInteger.valueOf(8)))==0 ||
+        module.compareTo(BigInteger.valueOf(-1).mod(BigInteger.valueOf(8)))==0) {
         return BigInteger.ONE;
       }
-      if(module.compareTo(BigInteger.valueOf(3).mod(BigInteger.valueOf(8)))==0 || module.compareTo(BigInteger.valueOf(-3).mod(BigInteger.valueOf(8)))==0){
+      if(module.compareTo(BigInteger.valueOf(3).mod(BigInteger.valueOf(8)))==0 
+        || module.compareTo(BigInteger.valueOf(-3).mod(BigInteger.valueOf(8)))==0){
         return BigInteger.valueOf(-1);
       }  
      }
-    
     //propriedade c)
     List<BigInteger> factor = list_factor(m);
     if(factor.size()==2){
@@ -93,7 +91,6 @@ public class jacobi {
         return jacobi(factor.get(0).multiply(jacobi(n,factor.get(1))),n);
       }
     }
-    
     //propriedade d)
      if(is_odd(m)){
        if(n.compareTo(m)== 0 && m.compareTo(BigInteger.valueOf(3).mod(BigInteger.valueOf(4)))==0 )/*n==m==3 mod 4*/{
